@@ -1,1 +1,1 @@
-Some Java projects for POC.
+Use Maven 3 to build projects.
