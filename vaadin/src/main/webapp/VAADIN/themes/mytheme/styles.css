@@ -1,0 +1,11 @@
+@import url(../reindeer/styles.css);
+
+.v-scrollable{
+	overflow: hidden;
+}
+
+.v-table-cell-wrapper {
+	white-space: pre-wrap;
+	word-wrap: break-word;
+	word-break: break-all;
+}
