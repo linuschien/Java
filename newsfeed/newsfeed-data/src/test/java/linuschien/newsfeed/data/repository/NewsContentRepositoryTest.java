@@ -9,6 +9,11 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -27,6 +32,13 @@ public class NewsContentRepositoryTest {
 
 		List<NewsContent> newsContents = newsContentRepository.findAll();
 		for (NewsContent content : newsContents) {
+			System.out.println(content.toString());
+		}
+
+		Pageable pageable = new PageRequest(0, 2, new Sort(new Order(Sort.Direction.DESC, "publishDate")));
+		Page<NewsContent> page = newsContentRepository.findAll(pageable);
+		Assert.assertTrue(page.getSize() > 0);
+		for (NewsContent content : page) {
 			System.out.println(content.toString());
 		}
 	}

@@ -9,7 +9,9 @@
 
 	<context:property-placeholder location="classpath:mongo.properties" />
 
-	<mongo:mongo host="${mongo.host}" port="${mongo.port}" />
+	<mongo:mongo host="${mongo.host}" port="${mongo.port}">
+		<mongo:options connections-per-host="10" />
+	</mongo:mongo>
 
 	<mongo:db-factory dbname="${mongo.dbname}" username="${mongo.username}" password="${mongo.password}" mongo-ref="mongo" />
 
