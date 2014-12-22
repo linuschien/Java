@@ -13,4 +13,11 @@
   <build>
     <finalName>newsfeed-web</finalName>
   </build>
+  <dependencies>
+  	<dependency>
+  		<groupId>linuschien</groupId>
+  		<artifactId>newsfeed-data</artifactId>
+  		<version>1.0.0-SNAPSHOT</version>
+  	</dependency>
+  </dependencies>
 </project>
