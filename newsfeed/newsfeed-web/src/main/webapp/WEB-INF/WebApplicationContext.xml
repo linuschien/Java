@@ -7,4 +7,7 @@
 	<import resource="classpath:ApplicationContext.xml" />
 	<context:component-scan base-package="linuschien.newsfeed.web" />
 
+	<!-- for AtomController -->
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" />
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter" />
 </beans>
