@@ -67,15 +67,15 @@ public class MasterDetailFormComponent extends CustomComponent {
 		table.addGeneratedColumn("Delete", new ColumnGenerator() {
 			@Override
 			public Object generateCell(final Table source, final Object itemId, Object columnId) {
-				Button button = new Button("刪除");
-				button.addListener(new ClickListener() {
+				Button delete = new Button("刪除");
+				delete.addListener(new ClickListener() {
 					@Override
 					public void buttonClick(ClickEvent event) {
 						source.getContainerDataSource().removeItem(itemId);
 						table.setPageLength(itemContainer.size());
 					}
 				});
-				return button;
+				return delete;
 			}
 		});
 
