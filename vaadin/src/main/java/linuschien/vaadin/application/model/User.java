@@ -28,10 +28,4 @@ public class User implements Serializable {
 		return new User(name, email, phone);
 	}
 
-	public void clear() {
-		name = "";
-		email = "";
-		phone = "";
-	}
-
 }
