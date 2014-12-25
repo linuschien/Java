@@ -1,6 +1,6 @@
 @import url(../reindeer/styles.css);
 
-.v-scrollable{
+.v-scrollable {
 	overflow: hidden;
 }
 
@@ -8,4 +8,8 @@
 	white-space: pre-wrap;
 	word-wrap: break-word;
 	word-break: break-all;
+}
+
+.v-table-cell-content-middle {
+	vertical-align: middle;
 }
