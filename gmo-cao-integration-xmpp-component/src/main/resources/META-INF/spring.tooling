@@ -1,0 +1,4 @@
+# Tooling related information for the integration xmpp namespace
+http\://www.gss.com.tw/schema/integration/xmpp/component@name=integration xmpp component Namespace
+http\://www.gss.com.tw/schema/integration/xmpp/component@prefix=int-xmpp-component
+http\://www.gss.com.tw/schema/integration/xmpp/component@icon=com/gss/gmo/cao/integration/xmpp/component/config/integration-xmpp-component.gif
