@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns="http://www.gss.com.tw/schema/integration/xmpp/component" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:tool="http://www.springframework.org/schema/tool" xmlns:integration="http://www.springframework.org/schema/integration"
+	targetNamespace="http://www.gss.com.tw/schema/integration/xmpp/component" attributeFormDefault="unqualified"
+	elementFormDefault="qualified">
+
+	<xsd:import namespace="http://www.springframework.org/schema/tool" />
+	<xsd:import namespace="http://www.springframework.org/schema/integration" schemaLocation="http://www.springframework.org/schema/integration/spring-integration.xsd" />
+
+	<xsd:element name="component-manager">
+		<xsd:annotation>
+			<xsd:documentation>Configures an external component manager</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:attribute name="id" type="xsd:string" default="componentManager" />
+			<xsd:attribute name="host" type="xsd:string" use="required">
+				<xsd:annotation>
+					<xsd:documentation>XMPP server host address</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="port" type="xsd:string" use="required">
+				<xsd:annotation>
+					<xsd:documentation>XMPP server port number for external component</xsd:documentation>
+				</xsd:annotation>
+			</xsd:attribute>
+			<xsd:attribute name="defaultSecretKey" type="xsd:string" />
+		</xsd:complexType>
+	</xsd:element>
+
+</xsd:schema>
