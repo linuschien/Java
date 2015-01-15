@@ -171,4 +171,9 @@
 			<url>scp://172.16.3.146/home/artifactory/public_html/maven/${artifactId}</url>
 		</site>
 	</distributionManagement>
+	<url>https://github.com/linuschien/Java/tree/master/gmo-cao-integration-xmpp-component</url>
+	<scm>
+		<url>https://github.com/linuschien/Java.git</url>
+		<developerConnection>Linus Chien</developerConnection>
+	</scm>
 </project>
