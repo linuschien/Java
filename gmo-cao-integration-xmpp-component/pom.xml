@@ -172,8 +172,4 @@
 		</site>
 	</distributionManagement>
 	<url>https://github.com/linuschien/Java/tree/master/gmo-cao-integration-xmpp-component</url>
-	<scm>
-		<url>https://github.com/linuschien/Java.git</url>
-		<developerConnection>Linus Chien</developerConnection>
-	</scm>
 </project>
