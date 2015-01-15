@@ -12,7 +12,7 @@
 			<xsd:documentation>Configures an external component manager</xsd:documentation>
 		</xsd:annotation>
 		<xsd:complexType>
-			<xsd:attribute name="id" type="xsd:string" default="componentManager" />
+			<xsd:attribute name="id" type="xsd:string" default="xmppExternalComponentManager" />
 			<xsd:attribute name="host" type="xsd:string" use="required">
 				<xsd:annotation>
 					<xsd:documentation>XMPP server host address</xsd:documentation>
