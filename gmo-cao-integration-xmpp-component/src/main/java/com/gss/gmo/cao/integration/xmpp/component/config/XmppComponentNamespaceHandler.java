@@ -8,6 +8,8 @@ import org.springframework.beans.factory.xml.NamespaceHandlerSupport;
  */
 public class XmppComponentNamespaceHandler extends NamespaceHandlerSupport {
 
+	public static final String XMPP_COMPONENT_MANAGER_BEAN_NAME = "xmppComponentManager";
+
 	@Override
 	public void init() {
 		registerBeanDefinitionParser("component-manager", new ComponentManagerParser());
