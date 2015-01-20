@@ -8,25 +8,26 @@ import org.xmpp.packet.Packet;
  * @author linus_chien
  *
  */
-public class SingleSubdomainComponentManager extends ExternalComponentManager {
+public class SingleSubdomainComponentManager {
 
+	private ExternalComponentManager componentManager;
 	private String subdomain;
 	private GlobalComponent component;
 
 	public SingleSubdomainComponentManager(String host, int port, String subdomain, String secretKey) throws ComponentException {
-		super(host, port);
+		this.componentManager = new ExternalComponentManager(host, port);
 		this.subdomain = subdomain;
-		this.setSecretKey(subdomain, secretKey);
+		componentManager.setSecretKey(subdomain, secretKey);
 		this.component = new GlobalComponent(subdomain, "Spring Integration XMPP Component");
-		this.addComponent(subdomain, component);
+		componentManager.addComponent(subdomain, component);
 	}
 
 	public void close() throws ComponentException {
-		this.removeComponent(subdomain);
+		componentManager.removeComponent(subdomain);
 	}
 
 	public void sendPacket(Packet packet) {
-		sendPacket(component, packet);
+		componentManager.sendPacket(component, packet);
 	}
 
 	public void setMessageListener(MessageListener messageListener) {
