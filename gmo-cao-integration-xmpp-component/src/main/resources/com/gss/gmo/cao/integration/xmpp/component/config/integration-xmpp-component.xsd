@@ -23,7 +23,8 @@
 					<xsd:documentation>XMPP server port number for external component</xsd:documentation>
 				</xsd:annotation>
 			</xsd:attribute>
-			<xsd:attribute name="defaultSecretKey" type="xsd:string" />
+			<xsd:attribute name="subdomain" type="xsd:string" use="required" />
+			<xsd:attribute name="secretKey" type="xsd:string" use="required" />
 		</xsd:complexType>
 	</xsd:element>
 
