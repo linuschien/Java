@@ -12,6 +12,8 @@ public class GlobalComponent extends AbstractComponent {
 	private String name;
 	private String description;
 
+	private MessageListener messageListener;
+
 	public GlobalComponent(String name, String description) {
 		super();
 		this.name = name;
@@ -28,10 +30,15 @@ public class GlobalComponent extends AbstractComponent {
 		return description;
 	}
 
+	public void setMessageListener(MessageListener messageListener) {
+		this.messageListener = messageListener;
+	}
+
 	@Override
 	protected void handleMessage(Message message) {
-		log.info(message.getBody());
-		log.info(getJID().toString());
+		if (messageListener != null) {
+			messageListener.handleMessage(message);
+		}
 	}
 
 }

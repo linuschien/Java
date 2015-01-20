@@ -1,7 +1,6 @@
 package com.gss.gmo.cao.integration.xmpp.component.core;
 
 import org.jivesoftware.whack.ExternalComponentManager;
-import org.xmpp.component.Component;
 import org.xmpp.component.ComponentException;
 import org.xmpp.packet.Packet;
 
@@ -22,16 +21,16 @@ public class SingleSubdomainComponentManager extends ExternalComponentManager {
 		this.addComponent(subdomain, component);
 	}
 
-	public Component getComponent() {
-		return component;
-	}
-
 	public void close() throws ComponentException {
 		this.removeComponent(subdomain);
 	}
 
 	public void sendPacket(Packet packet) {
-		super.sendPacket(component, packet);
+		sendPacket(component, packet);
+	}
+
+	public void setMessageListener(MessageListener messageListener) {
+		component.setMessageListener(messageListener);
 	}
 
 }

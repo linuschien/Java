@@ -10,6 +10,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.xmpp.packet.Message;
 
+import com.gss.gmo.cao.integration.xmpp.component.core.MessageListener;
 import com.gss.gmo.cao.integration.xmpp.component.core.SingleSubdomainComponentManager;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -25,6 +26,12 @@ public class ComponentTest {
 
 	@Test
 	public void test() {
+		componentManager.setMessageListener(new MessageListener() {
+			@Override
+			public void handleMessage(Message message) {
+				result = message.getBody();
+			}
+		});
 
 		Message message = new Message();
 		message.setTo("linus_chien@ext.im.gss.com.tw");
