@@ -13,6 +13,7 @@ public class XmppComponentNamespaceHandler extends NamespaceHandlerSupport {
 	@Override
 	public void init() {
 		registerBeanDefinitionParser("component-manager", new ComponentManagerParser());
+		registerBeanDefinitionParser("message-outbound-channel-adapter", new MessageOutboundChannelAdapterParser());
 	}
 
 }

@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:int-xmpp-component="http://www.gss.com.tw/schema/integration/xmpp/component"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	xmlns:int-xmpp-component="http://www.gss.com.tw/schema/integration/xmpp/component" xmlns:int="http://www.springframework.org/schema/integration"
+	xsi:schemaLocation="http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.gss.com.tw/schema/integration/xmpp/component http://www.gss.com.tw/schema/integration/xmpp/component/integration-xmpp-component.xsd">
 
 	<int-xmpp-component:component-manager host="172.16.3.113" port="5275" subdomain="ext" secretKey="gss1234" />
+	<int:channel id="message-outbound-channel" />
+	<int-xmpp-component:message-outbound-channel-adapter channel="message-outbound-channel" />
 
 </beans>
