@@ -5,8 +5,10 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.gss.com.tw/schema/integration/xmpp/component http://www.gss.com.tw/schema/integration/xmpp/component/integration-xmpp-component.xsd">
 
-	<int-xmpp-component:component-manager host="172.16.3.113" port="5275" subdomain="ext" secretKey="gss1234" />
+	<int-xmpp-component:component-manager host="172.16.3.113" port="5275" subdomain="ext"
+		secretKey="gss1234" />
 	<int:channel id="message-outbound-channel" />
 	<int-xmpp-component:message-outbound-channel-adapter channel="message-outbound-channel" />
-
+	<int:gateway id="messageService" default-request-channel="message-outbound-channel"
+		service-interface="com.gss.gmo.cao.integration.xmpp.component.MessageService" />
 </beans>
