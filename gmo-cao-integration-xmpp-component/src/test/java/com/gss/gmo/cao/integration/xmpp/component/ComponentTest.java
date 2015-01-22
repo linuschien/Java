@@ -10,8 +10,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.xmpp.packet.Message;
 
+import com.gss.gmo.cao.integration.xmpp.component.core.ComponentManager;
 import com.gss.gmo.cao.integration.xmpp.component.core.MessageListener;
-import com.gss.gmo.cao.integration.xmpp.component.core.SingleSubdomainComponentManager;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
@@ -22,7 +22,7 @@ public class ComponentTest {
 	private String result;
 
 	@Autowired
-	private SingleSubdomainComponentManager componentManager;
+	private ComponentManager componentManager;
 
 	@Test
 	public void test() {

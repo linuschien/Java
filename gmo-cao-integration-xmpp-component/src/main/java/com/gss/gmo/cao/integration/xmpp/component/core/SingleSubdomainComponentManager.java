@@ -8,7 +8,7 @@ import org.xmpp.packet.Packet;
  * @author linus_chien
  *
  */
-public class SingleSubdomainComponentManager {
+public class SingleSubdomainComponentManager implements ComponentManager {
 
 	private ExternalComponentManager componentManager;
 	private String subdomain;
@@ -26,10 +26,12 @@ public class SingleSubdomainComponentManager {
 		componentManager.removeComponent(subdomain);
 	}
 
+	@Override
 	public void sendPacket(Packet packet) {
 		componentManager.sendPacket(component, packet);
 	}
 
+	@Override
 	public void setMessageListener(MessageListener messageListener) {
 		component.setMessageListener(messageListener);
 	}
