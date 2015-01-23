@@ -10,9 +10,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.xmpp.packet.Message;
 
-import com.gss.gmo.cao.integration.xmpp.component.core.ComponentManager;
-import com.gss.gmo.cao.integration.xmpp.component.core.MessageListener;
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration
 @DirtiesContext
@@ -22,19 +19,14 @@ public class ComponentTest {
 	private String result;
 
 	@Autowired
-	private ComponentManager componentManager;
+	private InboundMessageService inboundMessageService;
 
 	@Autowired
 	private MessageService messageService;
 
 	@Test
 	public void test() {
-		componentManager.setMessageListener(new MessageListener() {
-			@Override
-			public void handleMessage(Message message) {
-				result = message.getBody();
-			}
-		});
+		inboundMessageService.setComponentTest(this);
 
 		Message message = new Message();
 		message.setTo("linus_chien@ext.im.gss.com.tw");
@@ -48,6 +40,10 @@ public class ComponentTest {
 		}
 
 		assertEquals(testMessage, result);
+	}
+
+	public void setResult(String result) {
+		this.result = result;
 	}
 
 }

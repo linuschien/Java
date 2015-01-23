@@ -7,8 +7,15 @@
 
 	<int-xmpp-component:component-manager host="172.16.3.113" port="5275" subdomain="ext"
 		secretKey="gss1234" />
+
 	<int:channel id="message-outbound-channel" />
 	<int-xmpp-component:message-outbound-channel-adapter channel="message-outbound-channel" />
 	<int:gateway id="messageService" default-request-channel="message-outbound-channel"
 		service-interface="com.gss.gmo.cao.integration.xmpp.component.MessageService" />
+
+	<int:channel id="message-inbound-channel" />
+	<int-xmpp-component:message-inbound-channel-adapter channel="message-inbound-channel" />
+	<int:service-activator input-channel="message-inbound-channel" ref="inboundMessageService" />
+	<bean id="inboundMessageService" class="com.gss.gmo.cao.integration.xmpp.component.InboundMessageService" />
+
 </beans>
