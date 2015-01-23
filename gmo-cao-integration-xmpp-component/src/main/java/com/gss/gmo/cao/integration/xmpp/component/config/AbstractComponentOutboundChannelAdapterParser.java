@@ -18,9 +18,9 @@ public abstract class AbstractComponentOutboundChannelAdapterParser extends Abst
 	protected AbstractBeanDefinition parseConsumer(Element element, ParserContext parserContext) {
 		BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(this.getHandlerClassName());
 
-		String connectionName = element.getAttribute("component-manager");
-		if (StringUtils.hasText(connectionName)) {
-			builder.addConstructorArgReference(connectionName);
+		String componentManagerName = element.getAttribute("component-manager");
+		if (StringUtils.hasText(componentManagerName)) {
+			builder.addConstructorArgReference(componentManagerName);
 		} else if (parserContext.getRegistry().containsBeanDefinition(XmppComponentNamespaceHandler.XMPP_COMPONENT_MANAGER_BEAN_NAME)) {
 			builder.addConstructorArgReference(XmppComponentNamespaceHandler.XMPP_COMPONENT_MANAGER_BEAN_NAME);
 		} else {
