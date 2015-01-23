@@ -39,6 +39,20 @@
 		</xsd:complexType>
 	</xsd:element>
 
+	<xsd:element name="message-inbound-channel-adapter">
+		<xsd:annotation>
+			<xsd:documentation>
+				Configures an endpoint that will receive chat messages sent to a given component manager and then
+				forward those messages to a MessageChannel.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="inboundAdapterType" />
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
 	<xsd:complexType name="outboundAdapterType">
 		<xsd:attributeGroup ref="integration:channelAdapterAttributes" />
 		<xsd:attribute name="component-manager" type="xsd:string">
@@ -49,6 +63,27 @@
 					</tool:annotation>
 				</xsd:appinfo>
 				<xsd:documentation>Reference to ComponentManager bean</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:complexType name="inboundAdapterType">
+		<xsd:attributeGroup ref="integration:channelAdapterAttributes" />
+		<xsd:attribute name="component-manager" type="xsd:string">
+			<xsd:annotation>
+				<xsd:appinfo>
+					<tool:annotation kind="ref">
+						<tool:expected-type type="com.gss.gmo.cao.integration.xmpp.component.core.ComponentManager" />
+					</tool:annotation>
+				</xsd:appinfo>
+				<xsd:documentation>Reference to ComponentManager bean</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="error-channel" type="xsd:string">
+			<xsd:annotation>
+				<xsd:documentation>
+					<![CDATA[Identifies channel that error messages will be sent to if a failure occurs in this adapter's invocation.]]>
+				</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
 	</xsd:complexType>
