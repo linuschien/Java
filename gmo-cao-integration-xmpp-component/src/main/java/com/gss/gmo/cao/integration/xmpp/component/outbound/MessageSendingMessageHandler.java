@@ -5,7 +5,7 @@ import static org.springframework.util.Assert.isTrue;
 import org.springframework.messaging.Message;
 
 import com.gss.gmo.cao.integration.xmpp.component.core.AbstractComponentManagerAwareMessageHandler;
-import com.gss.gmo.cao.integration.xmpp.component.core.SingleSubdomainComponentManager;
+import com.gss.gmo.cao.integration.xmpp.component.core.ComponentManager;
 
 /**
  * @author linus_chien
@@ -13,7 +13,7 @@ import com.gss.gmo.cao.integration.xmpp.component.core.SingleSubdomainComponentM
  */
 public class MessageSendingMessageHandler extends AbstractComponentManagerAwareMessageHandler {
 
-	public MessageSendingMessageHandler(SingleSubdomainComponentManager componentManager) {
+	public MessageSendingMessageHandler(ComponentManager componentManager) {
 		super(componentManager);
 	}
 
