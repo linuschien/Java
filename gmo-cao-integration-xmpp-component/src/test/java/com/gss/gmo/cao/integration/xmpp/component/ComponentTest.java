@@ -22,7 +22,7 @@ public class ComponentTest {
 	private InboundMessageService inboundMessageService;
 
 	@Autowired
-	private MessageService messageService;
+	private OutboundMessageService outboundMessageService;
 
 	@Test
 	public void test() {
@@ -31,7 +31,7 @@ public class ComponentTest {
 		Message message = new Message();
 		message.setTo("linus_chien@ext.im.gss.com.tw");
 		message.setBody(testMessage);
-		messageService.send(message);
+		outboundMessageService.send(message);
 
 		try {
 			Thread.sleep(500);

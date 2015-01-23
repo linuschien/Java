@@ -11,7 +11,7 @@
 	<int:channel id="message-outbound-channel" />
 	<int-xmpp-component:message-outbound-channel-adapter channel="message-outbound-channel" />
 	<int:gateway id="messageService" default-request-channel="message-outbound-channel"
-		service-interface="com.gss.gmo.cao.integration.xmpp.component.MessageService" />
+		service-interface="com.gss.gmo.cao.integration.xmpp.component.OutboundMessageService" />
 
 	<int:channel id="message-inbound-channel" />
 	<int-xmpp-component:message-inbound-channel-adapter channel="message-inbound-channel" />
