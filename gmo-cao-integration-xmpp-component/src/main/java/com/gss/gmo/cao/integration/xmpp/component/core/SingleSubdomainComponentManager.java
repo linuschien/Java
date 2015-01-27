@@ -36,4 +36,9 @@ public class SingleSubdomainComponentManager implements ComponentManager {
 		component.setMessageListener(messageListener);
 	}
 
+	@Override
+	public void setPresenceListener(PresenceListener presenceListener) {
+		component.setPresenceListener(presenceListener);
+	}
+
 }

@@ -12,4 +12,6 @@ public interface ComponentManager {
 
 	void setMessageListener(MessageListener messageListener);
 
+	void setPresenceListener(PresenceListener presenceListener);
+
 }
