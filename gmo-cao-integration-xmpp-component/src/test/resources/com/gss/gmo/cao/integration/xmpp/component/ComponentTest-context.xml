@@ -18,4 +18,14 @@
 	<int:service-activator input-channel="message-inbound-channel" ref="inboundMessageService" />
 	<bean id="inboundMessageService" class="com.gss.gmo.cao.integration.xmpp.component.InboundMessageService" />
 
+	<int:channel id="presence-outbound-channel" />
+	<int-xmpp-component:presence-outbound-channel-adapter channel="presence-outbound-channel" />
+	<int:gateway id="presenceService" default-request-channel="presence-outbound-channel"
+		service-interface="com.gss.gmo.cao.integration.xmpp.component.OutboundPresenceService" />
+
+	<int:channel id="presence-inbound-channel" />
+	<int-xmpp-component:presence-inbound-channel-adapter channel="presence-inbound-channel" />
+	<int:service-activator input-channel="presence-inbound-channel" ref="inboundPresenceService" />
+	<bean id="inboundPresenceService" class="com.gss.gmo.cao.integration.xmpp.component.InboundPresenceService" />
+
 </beans>
