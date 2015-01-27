@@ -1,5 +1,7 @@
 package com.gss.gmo.cao.integration.xmpp.component.inbound;
 
+import static org.springframework.util.Assert.isTrue;
+
 import org.springframework.integration.support.AbstractIntegrationMessageBuilder;
 import org.xmpp.packet.Message;
 
@@ -24,6 +26,7 @@ public class MessageListeningEndpoint extends AbstractComponentManagerAwareEndpo
 
 	@Override
 	protected void doStart() {
+		isTrue(this.initialized, this.getComponentName() + " [" + this.getComponentType() + "] must be initialized");
 		this.componentManager.setMessageListener(new MessageListener() {
 			@Override
 			public void handleMessage(Message message) {
