@@ -53,6 +53,33 @@
 		</xsd:complexType>
 	</xsd:element>
 
+	<xsd:element name="presence-outbound-channel-adapter">
+		<xsd:annotation>
+			<xsd:documentation>
+				Configures an endpoint that will publish an updated {@link org.xmpp.packet.Presence} state on your
+				{@link com.gss.gmo.cao.integration.xmpp.component.core.ComponentManager } object.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="outboundAdapterType" />
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="presence-inbound-channel-adapter">
+		<xsd:annotation>
+			<xsd:documentation>
+				Configures an endpoint that will forward Presence state changes to a MessageChannel.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="inboundAdapterType" />
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
 	<xsd:complexType name="outboundAdapterType">
 		<xsd:attributeGroup ref="integration:channelAdapterAttributes" />
 		<xsd:attribute name="component-manager" type="xsd:string">
