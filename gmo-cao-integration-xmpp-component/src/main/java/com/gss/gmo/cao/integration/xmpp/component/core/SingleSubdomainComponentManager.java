@@ -4,6 +4,8 @@ import org.jivesoftware.whack.ExternalComponentManager;
 import org.xmpp.component.ComponentException;
 import org.xmpp.packet.Packet;
 
+import com.gss.gmo.cao.integration.xmpp.component.core.IQListener.Type;
+
 /**
  * @author linus_chien
  *
@@ -39,6 +41,11 @@ public class SingleSubdomainComponentManager implements ComponentManager {
 	@Override
 	public void setPresenceListener(PresenceListener presenceListener) {
 		component.setPresenceListener(presenceListener);
+	}
+
+	@Override
+	public void addIQListener(Type type, IQListener iqListener) {
+		component.addIQListener(type, iqListener);
 	}
 
 }
