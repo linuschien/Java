@@ -80,6 +80,28 @@
 		</xsd:complexType>
 	</xsd:element>
 
+	<xsd:element name="iq-outbound-channel-adapter">
+		<xsd:annotation>
+			<xsd:documentation>Outbound Channel Adapter that sends IQs.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="outboundAdapterType" />
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="iq-inbound-channel-adapter">
+		<xsd:annotation>
+			<xsd:documentation>Configures an endpoint that will forward IQs to a MessageChannel.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="inboundAdapterType" />
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
 	<xsd:complexType name="outboundAdapterType">
 		<xsd:attributeGroup ref="integration:channelAdapterAttributes" />
 		<xsd:attribute name="component-manager" type="xsd:string">
