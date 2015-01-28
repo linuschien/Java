@@ -1,6 +1,7 @@
 package com.gss.gmo.cao.integration.xmpp.component.core;
 
 import org.xmpp.component.AbstractComponent;
+import org.xmpp.packet.IQ;
 import org.xmpp.packet.Message;
 import org.xmpp.packet.Presence;
 
@@ -15,6 +16,8 @@ public class GlobalComponent extends AbstractComponent {
 
 	private MessageListener messageListener;
 	private PresenceListener presenceListener;
+	private IQListener resultIQListener;
+	private IQListener errorIQListener;
 
 	public GlobalComponent(String name, String description) {
 		super();
@@ -40,6 +43,14 @@ public class GlobalComponent extends AbstractComponent {
 		this.presenceListener = presenceListener;
 	}
 
+	public void setResultIQListener(IQListener resultIQListener) {
+		this.resultIQListener = resultIQListener;
+	}
+
+	public void setErrorIQListener(IQListener errorIQListener) {
+		this.errorIQListener = errorIQListener;
+	}
+
 	@Override
 	protected void handleMessage(Message message) {
 		if (messageListener != null) {
@@ -51,6 +62,22 @@ public class GlobalComponent extends AbstractComponent {
 	protected void handlePresence(Presence presence) {
 		if (presenceListener != null) {
 			presenceListener.handlePresence(presence);
+		}
+	}
+
+	@Override
+	protected void handleIQResult(IQ iq) {
+		if (resultIQListener != null) {
+			resultIQListener.handleIQ(iq);
+		}
+	}
+
+	@Override
+	protected void handleIQError(IQ iq) {
+		if (errorIQListener != null) {
+			errorIQListener.handleIQ(iq);
+		} else {
+			super.handleIQError(iq);
 		}
 	}
 
