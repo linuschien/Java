@@ -1,5 +1,7 @@
 package com.gss.gmo.cao.integration.xmpp.component.core;
 
+import java.util.EnumMap;
+
 import org.xmpp.component.AbstractComponent;
 import org.xmpp.packet.IQ;
 import org.xmpp.packet.Message;
@@ -16,8 +18,7 @@ public class GlobalComponent extends AbstractComponent {
 
 	private MessageListener messageListener;
 	private PresenceListener presenceListener;
-	private IQListener resultIQListener;
-	private IQListener errorIQListener;
+	private EnumMap<IQListener.Type, IQListener> iqListenerMap = new EnumMap<IQListener.Type, IQListener>(IQListener.Type.class);
 
 	public GlobalComponent(String name, String description) {
 		super();
@@ -43,12 +44,8 @@ public class GlobalComponent extends AbstractComponent {
 		this.presenceListener = presenceListener;
 	}
 
-	public void setResultIQListener(IQListener resultIQListener) {
-		this.resultIQListener = resultIQListener;
-	}
-
-	public void setErrorIQListener(IQListener errorIQListener) {
-		this.errorIQListener = errorIQListener;
+	public void addIQListener(IQListener.Type type, IQListener iqListener) {
+		this.iqListenerMap.put(type, iqListener);
 	}
 
 	@Override
@@ -67,15 +64,15 @@ public class GlobalComponent extends AbstractComponent {
 
 	@Override
 	protected void handleIQResult(IQ iq) {
-		if (resultIQListener != null) {
-			resultIQListener.handleIQ(iq);
+		if (iqListenerMap.get(IQListener.Type.result) != null) {
+			iqListenerMap.get(IQListener.Type.result).handleIQ(iq);
 		}
 	}
 
 	@Override
 	protected void handleIQError(IQ iq) {
-		if (errorIQListener != null) {
-			errorIQListener.handleIQ(iq);
+		if (iqListenerMap.get(IQListener.Type.error) != null) {
+			iqListenerMap.get(IQListener.Type.error).handleIQ(iq);
 		} else {
 			super.handleIQError(iq);
 		}
