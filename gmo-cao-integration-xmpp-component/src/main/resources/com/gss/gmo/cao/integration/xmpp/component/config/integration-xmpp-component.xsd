@@ -98,7 +98,7 @@
 		<xsd:complexType>
 			<xsd:complexContent>
 				<xsd:extension base="inboundAdapterType">
-					<xsd:attribute name="iqType" use="required">
+					<xsd:attribute name="iq-type" use="required">
 						<xsd:simpleType>
 							<xsd:restriction base="xsd:string">
 								<xsd:enumeration value="result" />

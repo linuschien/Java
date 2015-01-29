@@ -34,11 +34,11 @@
 		service-interface="com.gss.gmo.cao.integration.xmpp.component.OutboundIQService" />
 
 	<int:channel id="resultIQ-inbound-channel" />
-	<int-xmpp-component:iq-inbound-channel-adapter iqType="result"
+	<int-xmpp-component:iq-inbound-channel-adapter iq-type="result"
 		channel="resultIQ-inbound-channel" />
 	<int:service-activator input-channel="resultIQ-inbound-channel" ref="inboundIQService" method="handleResultIQ" />
 	<int:channel id="errorIQ-inbound-channel" />
-	<int-xmpp-component:iq-inbound-channel-adapter iqType="error"
+	<int-xmpp-component:iq-inbound-channel-adapter iq-type="error"
 		channel="errorIQ-inbound-channel" />
 	<int:service-activator input-channel="errorIQ-inbound-channel" ref="inboundIQService" method="handleErrorIQ" />
 	<bean id="inboundIQService" class="com.gss.gmo.cao.integration.xmpp.component.InboundIQService" />

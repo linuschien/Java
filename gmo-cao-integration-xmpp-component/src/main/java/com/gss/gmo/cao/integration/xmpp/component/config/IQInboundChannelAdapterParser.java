@@ -21,7 +21,7 @@ public class IQInboundChannelAdapterParser extends AbstractComponentInboundChann
 	@Override
 	protected AbstractBeanDefinition doParse(Element element, ParserContext parserContext, String channelName) {
 		AbstractBeanDefinition beanDefinition = super.doParse(element, parserContext, channelName);
-		String iqType = element.getAttribute("iqType");
+		String iqType = element.getAttribute("iq-type");
 		if (hasText(iqType)) {
 			beanDefinition.getPropertyValues().addPropertyValue("iqType", iqType);
 		} else {
