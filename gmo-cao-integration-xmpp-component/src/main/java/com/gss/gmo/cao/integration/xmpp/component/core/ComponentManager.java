@@ -2,7 +2,7 @@ package com.gss.gmo.cao.integration.xmpp.component.core;
 
 import org.xmpp.packet.Packet;
 
-import com.gss.gmo.cao.integration.xmpp.component.core.IQListener.Type;
+import com.gss.gmo.cao.integration.xmpp.component.core.IQListener.IQType;
 
 /**
  * @author linus_chien
@@ -16,6 +16,6 @@ public interface ComponentManager {
 
 	void setPresenceListener(PresenceListener presenceListener);
 
-	void addIQListener(Type type, IQListener iqListener);
+	void addIQListener(IQType iqType, IQListener iqListener);
 
 }

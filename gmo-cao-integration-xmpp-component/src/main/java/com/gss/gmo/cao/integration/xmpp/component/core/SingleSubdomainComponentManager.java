@@ -4,7 +4,7 @@ import org.jivesoftware.whack.ExternalComponentManager;
 import org.xmpp.component.ComponentException;
 import org.xmpp.packet.Packet;
 
-import com.gss.gmo.cao.integration.xmpp.component.core.IQListener.Type;
+import com.gss.gmo.cao.integration.xmpp.component.core.IQListener.IQType;
 
 /**
  * @author linus_chien
@@ -44,8 +44,8 @@ public class SingleSubdomainComponentManager implements ComponentManager {
 	}
 
 	@Override
-	public void addIQListener(Type type, IQListener iqListener) {
-		component.addIQListener(type, iqListener);
+	public void addIQListener(IQType iqType, IQListener iqListener) {
+		component.addIQListener(iqType, iqListener);
 	}
 
 }

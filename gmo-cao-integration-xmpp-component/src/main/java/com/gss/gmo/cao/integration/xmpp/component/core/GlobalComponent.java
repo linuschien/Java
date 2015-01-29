@@ -1,7 +1,7 @@
 package com.gss.gmo.cao.integration.xmpp.component.core;
 
-import static com.gss.gmo.cao.integration.xmpp.component.core.IQListener.Type.error;
-import static com.gss.gmo.cao.integration.xmpp.component.core.IQListener.Type.result;
+import static com.gss.gmo.cao.integration.xmpp.component.core.IQListener.IQType.error;
+import static com.gss.gmo.cao.integration.xmpp.component.core.IQListener.IQType.result;
 
 import java.util.EnumMap;
 
@@ -10,7 +10,7 @@ import org.xmpp.packet.IQ;
 import org.xmpp.packet.Message;
 import org.xmpp.packet.Presence;
 
-import com.gss.gmo.cao.integration.xmpp.component.core.IQListener.Type;
+import com.gss.gmo.cao.integration.xmpp.component.core.IQListener.IQType;
 
 /**
  * @author linus_chien
@@ -23,7 +23,7 @@ public class GlobalComponent extends AbstractComponent {
 
 	private MessageListener messageListener;
 	private PresenceListener presenceListener;
-	private EnumMap<Type, IQListener> iqListenerMap = new EnumMap<Type, IQListener>(Type.class);
+	private EnumMap<IQType, IQListener> iqListenerMap = new EnumMap<IQType, IQListener>(IQType.class);
 
 	public GlobalComponent(String name, String description) {
 		super();
@@ -49,8 +49,8 @@ public class GlobalComponent extends AbstractComponent {
 		this.presenceListener = presenceListener;
 	}
 
-	public void addIQListener(Type type, IQListener iqListener) {
-		this.iqListenerMap.put(type, iqListener);
+	public void addIQListener(IQType iqType, IQListener iqListener) {
+		this.iqListenerMap.put(iqType, iqListener);
 	}
 
 	@Override

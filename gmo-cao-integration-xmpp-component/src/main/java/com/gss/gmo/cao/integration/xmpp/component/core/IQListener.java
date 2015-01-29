@@ -4,7 +4,7 @@ import org.xmpp.packet.IQ;
 
 public interface IQListener {
 
-	enum Type {
+	enum IQType {
 		result, error
 	}
 
