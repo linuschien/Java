@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.xmpp.packet.IQ;
+import org.xmpp.packet.IQ.Type;
 import org.xmpp.packet.Message;
 import org.xmpp.packet.Presence;
 
@@ -18,9 +20,13 @@ public class ComponentTest {
 
 	private final String testMessage = "Test by Linus";
 	private final String testStatus = "Linus On-line";
+	private final String testResultChildElementName = "linus-result";
+	private final String testErrorChildElementName = "linus-error";
 
 	private String result;
 	private String status;
+	private String resultChildElementName;
+	private String errorChildElementName;
 
 	@Autowired
 	private InboundMessageService inboundMessageService;
@@ -34,10 +40,17 @@ public class ComponentTest {
 	@Autowired
 	private OutboundPresenceService outboundPresenceService;
 
+	@Autowired
+	private InboundIQService inboundIQService;
+
+	@Autowired
+	private OutboundIQService outboundIQService;
+
 	@Test
 	public void test() {
 		inboundMessageService.setComponentTest(this);
 		inboundPresenceService.setComponentTest(this);
+		inboundIQService.setComponentTest(this);
 
 		Message message = new Message();
 		message.setTo("linus_chien@ext.im.gss.com.tw");
@@ -49,6 +62,18 @@ public class ComponentTest {
 		presence.setStatus(testStatus);
 		outboundPresenceService.send(presence);
 
+		IQ resultIQ = new IQ();
+		resultIQ.setTo("linus_chien@ext.im.gss.com.tw");
+		resultIQ.setType(Type.result);
+		resultIQ.setChildElement(testResultChildElementName, testResultChildElementName);
+		outboundIQService.send(resultIQ);
+
+		IQ errorIQ = new IQ();
+		errorIQ.setTo("linus_chien@ext.im.gss.com.tw");
+		errorIQ.setType(Type.error);
+		errorIQ.setChildElement(testErrorChildElementName, testErrorChildElementName);
+		outboundIQService.send(errorIQ);
+
 		try {
 			Thread.sleep(500);
 		} catch (InterruptedException e) {
@@ -57,6 +82,8 @@ public class ComponentTest {
 
 		assertEquals(testMessage, result);
 		assertEquals(testStatus, status);
+		assertEquals(testResultChildElementName, resultChildElementName);
+		assertEquals(testErrorChildElementName, errorChildElementName);
 	}
 
 	public void setResult(String result) {
@@ -65,6 +92,14 @@ public class ComponentTest {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public void setResultChildElementName(String resultChildElementName) {
+		this.resultChildElementName = resultChildElementName;
+	}
+
+	public void setErrorChildElementName(String errorChildElementName) {
+		this.errorChildElementName = errorChildElementName;
 	}
 
 }

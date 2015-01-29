@@ -28,4 +28,19 @@
 	<int:service-activator input-channel="presence-inbound-channel" ref="inboundPresenceService" />
 	<bean id="inboundPresenceService" class="com.gss.gmo.cao.integration.xmpp.component.InboundPresenceService" />
 
+	<int:channel id="iq-outbound-channel" />
+	<int-xmpp-component:iq-outbound-channel-adapter channel="iq-outbound-channel" />
+	<int:gateway id="iqService" default-request-channel="iq-outbound-channel"
+		service-interface="com.gss.gmo.cao.integration.xmpp.component.OutboundIQService" />
+
+	<int:channel id="resultIQ-inbound-channel" />
+	<int-xmpp-component:iq-inbound-channel-adapter iqType="result"
+		channel="resultIQ-inbound-channel" />
+	<int:service-activator input-channel="resultIQ-inbound-channel" ref="inboundIQService" method="handleResultIQ" />
+	<int:channel id="errorIQ-inbound-channel" />
+	<int-xmpp-component:iq-inbound-channel-adapter iqType="error"
+		channel="errorIQ-inbound-channel" />
+	<int:service-activator input-channel="errorIQ-inbound-channel" ref="inboundIQService" method="handleErrorIQ" />
+	<bean id="inboundIQService" class="com.gss.gmo.cao.integration.xmpp.component.InboundIQService" />
+
 </beans>
