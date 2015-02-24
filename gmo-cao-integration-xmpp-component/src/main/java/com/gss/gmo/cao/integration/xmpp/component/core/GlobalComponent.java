@@ -24,6 +24,7 @@ public class GlobalComponent extends AbstractComponent {
 	private MessageListener messageListener;
 	private PresenceListener presenceListener;
 	private EnumMap<IQType, IQListener> iqListenerMap = new EnumMap<IQType, IQListener>(IQType.class);
+	private EnumMap<IQHandler.IQType, IQHandler> iqHandlerMap = new EnumMap<IQHandler.IQType, IQHandler>(IQHandler.IQType.class);
 
 	public GlobalComponent(String name, String description) {
 		super();
@@ -53,6 +54,10 @@ public class GlobalComponent extends AbstractComponent {
 		this.iqListenerMap.put(iqType, iqListener);
 	}
 
+	public void addIQHandler(IQHandler.IQType iqType, IQHandler iqHandler) {
+		this.iqHandlerMap.put(iqType, iqHandler);
+	}
+
 	@Override
 	protected void handleMessage(Message message) {
 		if (messageListener != null) {
@@ -80,6 +85,24 @@ public class GlobalComponent extends AbstractComponent {
 			iqListenerMap.get(error).handleIQ(iq);
 		} else {
 			super.handleIQError(iq);
+		}
+	}
+
+	@Override
+	protected IQ handleIQGet(IQ iq) {
+		if (iqHandlerMap.get(IQHandler.IQType.get) != null) {
+			return iqHandlerMap.get(IQHandler.IQType.get).handleIQ(iq);
+		} else {
+			return null;
+		}
+	}
+
+	@Override
+	protected IQ handleIQSet(IQ iq) {
+		if (iqHandlerMap.get(IQHandler.IQType.set) != null) {
+			return iqHandlerMap.get(IQHandler.IQType.set).handleIQ(iq);
+		} else {
+			return null;
 		}
 	}
 
