@@ -48,4 +48,9 @@ public class SingleSubdomainComponentManager implements ComponentManager {
 		component.addIQListener(iqType, iqListener);
 	}
 
+	@Override
+	public void addIQHandler(IQHandler.IQType iqType, IQHandler iqHandler) {
+		component.addIQHandler(iqType, iqHandler);
+	}
+
 }

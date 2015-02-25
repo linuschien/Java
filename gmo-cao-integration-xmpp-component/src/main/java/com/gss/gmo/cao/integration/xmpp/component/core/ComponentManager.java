@@ -18,4 +18,6 @@ public interface ComponentManager {
 
 	void addIQListener(IQType iqType, IQListener iqListener);
 
+	void addIQHandler(IQHandler.IQType iqType, IQHandler iqHandler);
+
 }
