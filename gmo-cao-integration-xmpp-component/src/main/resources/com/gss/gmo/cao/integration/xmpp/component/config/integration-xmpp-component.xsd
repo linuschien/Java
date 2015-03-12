@@ -111,6 +111,28 @@
 		</xsd:complexType>
 	</xsd:element>
 
+	<xsd:element name="inbound-gateway">
+		<xsd:annotation>
+			<xsd:documentation>
+				Defines an inbound HTTP-based Messaging Gateway.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:complexType>
+			<xsd:complexContent>
+				<xsd:extension base="gatewayType">
+					<xsd:attribute name="iq-type" use="required">
+						<xsd:simpleType>
+							<xsd:restriction base="xsd:string">
+								<xsd:enumeration value="get" />
+								<xsd:enumeration value="set" />
+							</xsd:restriction>
+						</xsd:simpleType>
+					</xsd:attribute>
+				</xsd:extension>
+			</xsd:complexContent>
+		</xsd:complexType>
+	</xsd:element>
+
 	<xsd:complexType name="outboundAdapterType">
 		<xsd:attributeGroup ref="integration:channelAdapterAttributes" />
 		<xsd:attribute name="component-manager" type="xsd:string">
@@ -144,6 +166,64 @@
 				</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
+	</xsd:complexType>
+
+	<xsd:complexType name="gatewayType">
+		<xsd:annotation>
+			<xsd:documentation>
+				Defines common configuration for gateway adapters.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="id" type="xsd:string" />
+		<xsd:attribute name="component-manager" type="xsd:string">
+			<xsd:annotation>
+				<xsd:appinfo>
+					<tool:annotation kind="ref">
+						<tool:expected-type type="com.gss.gmo.cao.integration.xmpp.component.core.ComponentManager" />
+					</tool:annotation>
+				</xsd:appinfo>
+				<xsd:documentation>Reference to ComponentManager bean</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="request-channel" type="xsd:string" use="required">
+			<xsd:annotation>
+				<xsd:appinfo>
+					<tool:annotation kind="ref">
+						<tool:expected-type type="org.springframework.messaging.MessageChannel" />
+					</tool:annotation>
+				</xsd:appinfo>
+				<xsd:documentation>
+					The receiving Message Channel of this endpoint.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="reply-channel" type="xsd:string" use="required">
+			<xsd:annotation>
+				<xsd:appinfo>
+					<tool:annotation kind="ref">
+						<tool:expected-type type="org.springframework.messaging.MessageChannel" />
+					</tool:annotation>
+				</xsd:appinfo>
+				<xsd:documentation>
+					Identifies the channel to which this gateway will subscribe, to receive(send) reply Messages.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="error-channel" type="xsd:string">
+			<xsd:annotation>
+				<xsd:appinfo>
+					<tool:annotation kind="ref">
+						<tool:expected-type type="org.springframework.messaging.MessageChannel" />
+					</tool:annotation>
+				</xsd:appinfo>
+				<xsd:documentation>
+					The MessagingGateway's 'error-channel' where to send an ErrorMessage in case
+					of Exception is
+					caused from original message flow.
+				</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attributeGroup ref="integration:smartLifeCycleAttributeGroup" />
 	</xsd:complexType>
 
 </xsd:schema>
