@@ -43,4 +43,8 @@
 	<int:service-activator input-channel="errorIQ-inbound-channel" ref="inboundIQService" method="handleErrorIQ" />
 	<bean id="inboundIQService" class="com.gss.gmo.cao.integration.xmpp.component.InboundIQService" />
 
+	<int:channel id="input-gateway-channel" />
+	<int:channel id="output-gateway-channel" />
+	<int-xmpp-component:iq-inbound-gateway id="iqInboundGateway" request-channel="input-gateway-channel" reply-channel="output-gateway-channel" iq-type="get" />
+	
 </beans>

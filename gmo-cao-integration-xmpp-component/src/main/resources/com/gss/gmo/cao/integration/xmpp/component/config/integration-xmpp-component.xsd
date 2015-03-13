@@ -111,7 +111,7 @@
 		</xsd:complexType>
 	</xsd:element>
 
-	<xsd:element name="inbound-gateway">
+	<xsd:element name="iq-inbound-gateway">
 		<xsd:annotation>
 			<xsd:documentation>
 				Defines an inbound HTTP-based Messaging Gateway.
