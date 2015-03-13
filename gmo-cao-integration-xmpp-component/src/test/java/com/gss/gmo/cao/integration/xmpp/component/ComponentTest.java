@@ -2,6 +2,19 @@ package com.gss.gmo.cao.integration.xmpp.component;
 
 import static org.junit.Assert.assertEquals;
 
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
+
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+
+import org.jivesoftware.smack.ConnectionConfiguration;
+import org.jivesoftware.smack.PacketListener;
+import org.jivesoftware.smack.SmackException.NotConnectedException;
+import org.jivesoftware.smack.XMPPConnection;
+import org.jivesoftware.smack.packet.Packet;
+import org.jivesoftware.smack.tcp.XMPPTCPConnection;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,6 +113,65 @@ public class ComponentTest {
 
 	public void setErrorChildElementName(String errorChildElementName) {
 		this.errorChildElementName = errorChildElementName;
+	}
+
+	// @Test
+	public void testIQInboundGateway() throws Exception {
+		TrustManager[] trustAllCerts = new TrustManager[] { new X509TrustManager() {
+			@Override
+			public X509Certificate[] getAcceptedIssuers() {
+				return null;
+			}
+
+			@Override
+			public void checkClientTrusted(X509Certificate[] certs, String authType) {
+			}
+
+			@Override
+			public void checkServerTrusted(X509Certificate[] certs, String authType) throws CertificateException {
+				System.out.println("^^^^^Check Server Cert...");
+			}
+		}
+
+		};
+		SSLContext ctx = SSLContext.getInstance("TLS");
+		ctx.init(null, trustAllCerts, null);
+
+		ConnectionConfiguration config = new ConnectionConfiguration("im.gss.com.tw", 5222);
+		config.setCustomSSLContext(ctx);
+		// config.setDebuggerEnabled(true);
+
+		XMPPConnection con = new XMPPTCPConnection(config);
+		con.connect();
+		con.login("linus_chien", "???", "Smack");
+
+		final org.jivesoftware.smack.packet.IQ iq = new org.jivesoftware.smack.packet.IQ() {
+			@Override
+			public String getChildElementXML() {
+				return "<query xmlns='jabber:iq:gateway'><storage xmlns='storage:bookmarks'/></query>";
+			}
+		};
+		iq.setTo("ext.im.gss.com.tw");
+		iq.setType(org.jivesoftware.smack.packet.IQ.Type.GET);
+		iq.setPacketID("xxxxxxxxxx");
+		con.sendPacket(iq);
+
+		con.addPacketListener(new PacketListener() {
+			@Override
+			public void processPacket(Packet packet) throws NotConnectedException {
+				if ("xxxxxxxxxx".equals(packet.getPacketID())) {
+					if (packet instanceof org.jivesoftware.smack.packet.IQ) {
+						assertEquals(((org.jivesoftware.smack.packet.IQ) packet).getChildElementXML(), iq.getChildElementXML());
+					}
+				}
+			}
+		}, null);
+
+		try {
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

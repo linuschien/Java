@@ -9,6 +9,8 @@ public class IQGatewayService {
 	@ServiceActivator
 	public IQ handleGetIQ(IQ iq) {
 		iq.setType(Type.result);
+		iq.setTo(iq.getFrom());
+		iq.setFrom("ext.im.gss.com.tw");
 		return iq;
 	}
 
