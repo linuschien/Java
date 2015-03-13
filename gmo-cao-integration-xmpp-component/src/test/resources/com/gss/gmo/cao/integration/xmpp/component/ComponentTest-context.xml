@@ -45,6 +45,9 @@
 
 	<int:channel id="input-gateway-channel" />
 	<int:channel id="output-gateway-channel" />
-	<int-xmpp-component:iq-inbound-gateway id="iqInboundGateway" request-channel="input-gateway-channel" reply-channel="output-gateway-channel" iq-type="get" />
-	
+	<int-xmpp-component:iq-inbound-gateway id="iqInboundGateway" request-channel="input-gateway-channel"
+		reply-channel="output-gateway-channel" iq-type="get" />
+	<int:service-activator input-channel="input-gateway-channel" output-channel="output-gateway-channel"
+		ref="iqGatewayService" />
+	<bean id="iqGatewayService" class="com.gss.gmo.cao.integration.xmpp.component.IQGatewayService" />
 </beans>
