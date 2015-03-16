@@ -30,7 +30,7 @@ public class GetRequestTokenIQProcessor extends AbstractIQProcessor {
 				String secret = requestToken.getSecret();
 				swapFromTo(iq);
 				iq.setType(Type.result);
-				Element result = iq.setChildElement("oauth", "request_key");
+				Element result = iq.setChildElement("oauth", "request_token");
 				result.addAttribute("value", value);
 				result.addAttribute("secret", secret);
 				result.addAttribute("user-authorization-url", protectedResourceDetails.getUserAuthorizationURL());
