@@ -24,7 +24,7 @@ public class GetRequestTokenIQProcessor extends AbstractIQProcessor {
 		ProtectedResourceDetails protectedResourceDetails = protectedResourceDetailsService.loadProtectedResourceDetailsById(resourceId);
 		if (iq.getType().equals(Type.get)) {
 			Element childElement = iq.getChildElement();
-			if ("get_request_token".equals(childElement.getNamespace().getStringValue())) {
+			if ("oauth".equals(childElement.getName()) && "get_request_token".equals(childElement.getNamespace().getStringValue())) {
 				OAuthConsumerToken requestToken = support.getUnauthorizedRequestToken(protectedResourceDetails, "oob");
 				String value = requestToken.getValue();
 				String secret = requestToken.getSecret();
