@@ -11,12 +11,12 @@ import org.jivesoftware.smack.ConnectionConfiguration;
 import org.jivesoftware.smack.PacketListener;
 import org.jivesoftware.smack.SmackException.NotConnectedException;
 import org.jivesoftware.smack.XMPPConnection;
-import org.jivesoftware.smack.filter.PacketFilter;
 import org.jivesoftware.smack.packet.IQ;
 import org.jivesoftware.smack.packet.Packet;
 import org.jivesoftware.smack.tcp.XMPPTCPConnection;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -26,7 +26,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @DirtiesContext
 public class OAuthIQProcessorTest {
 
-	// @Test
+	@Value("${user.name}")
+	private String name;
+
+	@Value("${user.password}")
+	private String password;
+
+	@Test
 	public void testGetRequestToken() throws Exception {
 		TrustManager[] trustAllCerts = new TrustManager[] { new X509TrustManager() {
 			@Override
@@ -54,7 +60,7 @@ public class OAuthIQProcessorTest {
 
 		XMPPConnection con = new XMPPTCPConnection(config);
 		con.connect();
-		con.login("linus_chien", "???", "Smack");
+		con.login(name, password, "Smack");
 
 		final IQ iq = new IQ() {
 			@Override

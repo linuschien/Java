@@ -2,11 +2,15 @@
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:int="http://www.springframework.org/schema/integration" xmlns:int-xmpp-component="http://www.gss.com.tw/schema/integration/xmpp/component"
 	xmlns:oauth="http://www.springframework.org/schema/security/oauth" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
 		http://www.springframework.org/schema/security/oauth http://www.springframework.org/schema/security/spring-security-oauth.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
-		http://www.gss.com.tw/schema/integration/xmpp/component http://www.gss.com.tw/schema/integration/xmpp/component/integration-xmpp-component.xsd">
+		http://www.gss.com.tw/schema/integration/xmpp/component http://www.gss.com.tw/schema/integration/xmpp/component/integration-xmpp-component.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:property-placeholder location="classpath:password.properties" />
 
 	<int-xmpp-component:component-manager host="172.16.3.113" port="5275" subdomain="ext"
 		secretKey="gss1234" />
@@ -19,7 +23,7 @@
 		ref="iqChain" method="process" />
 
 	<oauth:resource-details-service id="resourceDetailsService">
-		<oauth:resource id="vitalsEsp" key="xxx" secret="yyy" request-token-method="GET"
+		<oauth:resource id="vitalsEsp" key="${oauth.key}" secret="${oauth.secret}" request-token-method="GET"
 			request-token-url="http://gsskm.gss.com.tw/km/oauth/RequestToken" user-authorization-url="http://gsskm.gss.com.tw/km/oauth/Dialog"
 			access-token-method="GET" access-token-url="http://gsskm.gss.com.tw/km/oauth/AccessToken"
 			accepts-authorization-header="false" />
