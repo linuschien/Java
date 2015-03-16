@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:int="http://www.springframework.org/schema/integration" xmlns:int-xmpp-component="http://www.gss.com.tw/schema/integration/xmpp/component"
+	xmlns:oauth="http://www.springframework.org/schema/security/oauth" xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
+		http://www.springframework.org/schema/security/oauth http://www.springframework.org/schema/security/spring-security-oauth.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd
+		http://www.gss.com.tw/schema/integration/xmpp/component http://www.gss.com.tw/schema/integration/xmpp/component/integration-xmpp-component.xsd">
+
+	<int-xmpp-component:component-manager host="172.16.3.113" port="5275" subdomain="ext"
+		secretKey="gss1234" />
+
+	<int:channel id="input-gateway-channel" />
+	<int:channel id="output-gateway-channel" />
+	<int-xmpp-component:iq-inbound-gateway id="iqInboundGateway" request-channel="input-gateway-channel"
+		reply-channel="output-gateway-channel" iq-type="get" />
+	<int:service-activator input-channel="input-gateway-channel" output-channel="output-gateway-channel"
+		ref="iqChain" method="process" />
+
+	<oauth:resource-details-service id="resourceDetailsService">
+		<oauth:resource id="vitalsEsp" key="xxx" secret="yyy" request-token-method="GET"
+			request-token-url="http://gsskm.gss.com.tw/km/oauth/RequestToken" user-authorization-url="http://gsskm.gss.com.tw/km/oauth/Dialog"
+			access-token-method="GET" access-token-url="http://gsskm.gss.com.tw/km/oauth/AccessToken"
+			accepts-authorization-header="false" />
+	</oauth:resource-details-service>
+
+	<bean id="iqChain" class="com.gss.gmo.cao.integration.xmpp.component.service.IQProcessorChain">
+		<constructor-arg>
+			<util:list>
+				<bean class="com.gss.gmo.cao.integration.xmpp.component.service.oauth.GetRequestTokenIQProcessor">
+					<property name="protectedResourceDetailsService" ref="resourceDetailsService" />
+					<property name="resourceId" value="vitalsEsp" />
+				</bean>
+			</util:list>
+		</constructor-arg>
+	</bean>
+</beans>
