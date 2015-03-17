@@ -18,6 +18,7 @@ import org.jivesoftware.smack.tcp.XMPPTCPConnection;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -40,6 +41,12 @@ public class ComponentTest {
 	private String status;
 	private String resultChildElementName;
 	private String errorChildElementName;
+
+	@Value("${user.name}")
+	private String name;
+
+	@Value("${user.password}")
+	private String password;
 
 	@Autowired
 	private InboundMessageService inboundMessageService;
@@ -143,7 +150,7 @@ public class ComponentTest {
 
 		XMPPConnection con = new XMPPTCPConnection(config);
 		con.connect();
-		con.login("linus_chien", "???", "Smack");
+		con.login(name, password, "Smack");
 
 		final org.jivesoftware.smack.packet.IQ iq = new org.jivesoftware.smack.packet.IQ() {
 			@Override
