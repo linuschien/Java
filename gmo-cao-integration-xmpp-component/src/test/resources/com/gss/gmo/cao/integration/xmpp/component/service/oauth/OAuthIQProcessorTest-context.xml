@@ -38,7 +38,7 @@
 					<property name="protectedResourceDetailsService" ref="resourceDetailsService" />
 					<property name="resourceId" value="vitalsEsp" />
 				</bean>
-				<bean class="com.gss.gmo.cao.integration.xmpp.component.service.oauth.SetVerifierCodeIQProcessor">
+				<bean class="com.gss.gmo.cao.integration.xmpp.component.service.oauth.GetAccessTokenIQProcessor">
 					<property name="protectedResourceDetailsService" ref="resourceDetailsService" />
 					<property name="resourceId" value="vitalsEsp" />
 				</bean>

@@ -124,11 +124,11 @@ public class OAuthIQProcessorTest {
 		final IQ iq = new IQ() {
 			@Override
 			public String getChildElementXML() {
-				return "<oauth xmlns='set_verifier_code' value='736efa3dfb3d44059fb309f61535abef' secret='33ac84aa0b5042cb9d64214dbccdc4c8' verifier='5iUzv3AZKZ0DSF7FUCBYxVqz'/>";
+				return "<oauth xmlns='get_access_token' value='736efa3dfb3d44059fb309f61535abef' secret='33ac84aa0b5042cb9d64214dbccdc4c8' verifier='5iUzv3AZKZ0DSF7FUCBYxVqz'/>";
 			}
 		};
 		iq.setTo("ext.im.gss.com.tw");
-		iq.setType(IQ.Type.SET);
+		iq.setType(IQ.Type.GET);
 		iq.setPacketID("yyyyyyyyyy");
 		con.sendPacket(iq);
 

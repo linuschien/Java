@@ -11,7 +11,7 @@ import org.xmpp.packet.IQ.Type;
 
 import com.gss.gmo.cao.integration.xmpp.component.service.AbstractIQProcessor;
 
-public class SetVerifierCodeIQProcessor extends AbstractIQProcessor {
+public class GetAccessTokenIQProcessor extends AbstractIQProcessor {
 
 	private OAuthConsumerSupport support = new CoreOAuthConsumerSupport();
 
@@ -57,7 +57,7 @@ public class SetVerifierCodeIQProcessor extends AbstractIQProcessor {
 
 	@Override
 	protected boolean isResponsible(IQ iq) {
-		if (!iq.getType().equals(Type.set)) {
+		if (!iq.getType().equals(Type.get)) {
 			return false;
 		}
 
@@ -65,7 +65,7 @@ public class SetVerifierCodeIQProcessor extends AbstractIQProcessor {
 		if (!"oauth".equals(childElement.getName())) {
 			return false;
 		}
-		if (!"set_verifier_code".equals(childElement.getNamespace().getStringValue())) {
+		if (!"get_access_token".equals(childElement.getNamespace().getStringValue())) {
 			return false;
 		}
 
