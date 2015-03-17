@@ -22,4 +22,6 @@ public abstract class AbstractIQProcessor implements IQProcessor {
 		iq.setTo(from);
 	}
 
+	protected abstract boolean isResponsible(IQ iq);
+
 }

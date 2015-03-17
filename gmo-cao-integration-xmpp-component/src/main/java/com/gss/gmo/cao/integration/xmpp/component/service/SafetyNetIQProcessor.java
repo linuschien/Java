@@ -12,4 +12,9 @@ public class SafetyNetIQProcessor extends AbstractIQProcessor {
 		return iq;
 	}
 
+	@Override
+	protected boolean isResponsible(IQ iq) {
+		return true;
+	}
+
 }

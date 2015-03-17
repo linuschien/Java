@@ -21,21 +21,18 @@ public class GetRequestTokenIQProcessor extends AbstractIQProcessor {
 
 	@Override
 	public IQ process(IQ iq) {
-		ProtectedResourceDetails protectedResourceDetails = protectedResourceDetailsService.loadProtectedResourceDetailsById(resourceId);
-		if (iq.getType().equals(Type.get)) {
-			Element childElement = iq.getChildElement();
-			if ("oauth".equals(childElement.getName()) && "get_request_token".equals(childElement.getNamespace().getStringValue())) {
-				OAuthConsumerToken requestToken = support.getUnauthorizedRequestToken(protectedResourceDetails, "oob");
-				String value = requestToken.getValue();
-				String secret = requestToken.getSecret();
-				swapFromTo(iq);
-				iq.setType(Type.result);
-				Element result = iq.setChildElement("oauth", "request_token");
-				result.addAttribute("value", value);
-				result.addAttribute("secret", secret);
-				result.addAttribute("user-authorization-url", protectedResourceDetails.getUserAuthorizationURL());
-				return iq;
-			}
+		if (isResponsible(iq)) {
+			ProtectedResourceDetails protectedResourceDetails = protectedResourceDetailsService.loadProtectedResourceDetailsById(resourceId);
+			OAuthConsumerToken requestToken = support.getUnauthorizedRequestToken(protectedResourceDetails, "oob");
+			String value = requestToken.getValue();
+			String secret = requestToken.getSecret();
+			swapFromTo(iq);
+			iq.setType(Type.result);
+			Element result = iq.setChildElement("oauth", "request_token");
+			result.addAttribute("value", value);
+			result.addAttribute("secret", secret);
+			result.addAttribute("user-authorization-url", protectedResourceDetails.getUserAuthorizationURL());
+			return iq;
 		}
 		return successor.process(iq);
 	}
@@ -46,6 +43,23 @@ public class GetRequestTokenIQProcessor extends AbstractIQProcessor {
 
 	public void setResourceId(String resourceId) {
 		this.resourceId = resourceId;
+	}
+
+	@Override
+	protected boolean isResponsible(IQ iq) {
+		if (!iq.getType().equals(Type.get)) {
+			return false;
+		}
+
+		Element childElement = iq.getChildElement();
+		if (!"oauth".equals(childElement.getName())) {
+			return false;
+		}
+		if (!"get_request_token".equals(childElement.getNamespace().getStringValue())) {
+			return false;
+		}
+
+		return true;
 	}
 
 }
