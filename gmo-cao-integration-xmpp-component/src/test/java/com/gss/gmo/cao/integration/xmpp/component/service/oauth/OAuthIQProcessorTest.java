@@ -124,7 +124,7 @@ public class OAuthIQProcessorTest {
 		final IQ iq = new IQ() {
 			@Override
 			public String getChildElementXML() {
-				return "<oauth xmlns='get_access_token' value='736efa3dfb3d44059fb309f61535abef' secret='33ac84aa0b5042cb9d64214dbccdc4c8' verifier='5iUzv3AZKZ0DSF7FUCBYxVqz'/>";
+				return "<oauth xmlns='get_access_token' value='ce2cf5dcbc8f4fbc800ed1ec4f958937' secret='56e38314b7cb42baa3ec4386c141a363' verifier='W3kTE7rT/MNQpoCcLU2DlfdV'/>";
 			}
 		};
 		iq.setTo("ext.im.gss.com.tw");
