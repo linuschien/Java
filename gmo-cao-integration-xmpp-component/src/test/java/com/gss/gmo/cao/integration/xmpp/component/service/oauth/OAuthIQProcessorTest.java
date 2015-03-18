@@ -91,7 +91,7 @@ public class OAuthIQProcessorTest {
 		}
 	}
 
-	@Test
+	// @Test
 	public void testSetVervifierCode() throws Exception {
 		TrustManager[] trustAllCerts = new TrustManager[] { new X509TrustManager() {
 			@Override
