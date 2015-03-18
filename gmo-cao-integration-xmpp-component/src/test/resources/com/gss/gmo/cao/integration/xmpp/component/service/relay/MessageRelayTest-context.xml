@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:int-xmpp-component="http://www.gss.com.tw/schema/integration/xmpp/component" xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+	xmlns:int-amqp="http://www.springframework.org/schema/integration/amqp"
+	xsi:schemaLocation="http://www.springframework.org/schema/integration/amqp http://www.springframework.org/schema/integration/amqp/spring-integration-amqp.xsd
+		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
+		http://www.springframework.org/schema/rabbit http://www.springframework.org/schema/rabbit/spring-rabbit.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.gss.com.tw/schema/integration/xmpp/component http://www.gss.com.tw/schema/integration/xmpp/component/integration-xmpp-component.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:property-placeholder location="classpath:password.properties" />
+
+	<rabbit:connection-factory id="connectionFactory" host="${rabbitmq.host}" username="${rabbitmq.username}"
+		password="${rabbitmq.password}" virtual-host="${rabbitmq.vhost.name}" />
+
+	<int-amqp:inbound-channel-adapter connection-factory="connectionFactory" queue-names="${rabbitmq.queue.name}"
+		channel="amqp-inbound-channel" />
+
+	<int:channel id="amqp-inbound-channel" />
+
+	<int:transformer input-channel="amqp-inbound-channel" output-channel="message-outbound-channel" ref="jsonToMessage"
+		method="convert" />
+	<bean id="jsonToMessage" class="com.gss.gmo.cao.integration.xmpp.component.service.relay.JsonToMessage" />
+
+	<int:channel id="message-outbound-channel" />
+
+	<int-xmpp-component:component-manager host="172.16.3.113" port="5275" subdomain="ext"
+		secretKey="gss1234" />
+
+	<int-xmpp-component:message-outbound-channel-adapter channel="message-outbound-channel" />
+
+	<rabbit:template id="rabbitTemplate" connection-factory="connectionFactory" />
+
+</beans>
