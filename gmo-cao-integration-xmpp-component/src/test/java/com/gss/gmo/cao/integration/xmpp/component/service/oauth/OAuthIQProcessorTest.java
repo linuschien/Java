@@ -26,10 +26,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @DirtiesContext
 public class OAuthIQProcessorTest {
 
-	@Value("${user.name}")
+	@Value("${jid.user.name}")
 	private String name;
 
-	@Value("${user.password}")
+	@Value("${jid.user.password}")
 	private String password;
 
 	// @Test
