@@ -1,0 +1,6 @@
+cluster.name: linus-lab-elasticsearch
+node.name: linus-node-client
+node.master: false
+node.data: false
+discovery.zen.ping.multicast.enabled: false
+discovery.zen.ping.unicast.hosts: ["172.17.18.124:9301", "172.17.18.124:9302", "172.17.18.124:9303", "172.17.18.124:9304"]
