@@ -8,7 +8,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 
 @Getter
 @Setter
-@Document(indexName = "users", indexStoreType = "mmapfs", refreshInterval = "5s", replicas = 1, shards = 1, type = "user")
+@Document(indexName = "users", indexStoreType = "mmapfs", refreshInterval = "1s", replicas = 1, shards = 1, type = "user")
 public class Users {
 
 	@Id
