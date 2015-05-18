@@ -1,0 +1,4 @@
+spring.freemarker.checkTemplateLocation: false
+server.port: 8081
+management.context-path: /manage
+endpoints.shutdown.enabled: true
