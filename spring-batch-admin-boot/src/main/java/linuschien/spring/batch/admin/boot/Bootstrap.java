@@ -7,7 +7,7 @@ public class Bootstrap {
     public static void main(String[] args) {
 
 	new SpringApplicationBuilder().sources(SpringConfiguration.class).child(SpringBatchAdminConfiguration.class)
-		.sibling(SpringBootActuatorConfiguration.class).build().run(args);
+		.sibling(SpringBootActuatorConfiguration.class).run(args);
     }
 
 }
